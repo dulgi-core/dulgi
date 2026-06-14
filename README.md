@@ -18,10 +18,6 @@ with every non-essential feature removed.
 | Consensus | CometBFT (BFT) |
 | Stack | Cosmos SDK v0.50.x · CometBFT v0.38.x · IBC-go v8.x |
 
-**No** CosmWasm · **No** EVM · **No** smart contracts · **No** NFT · **No** ICA/ICQ ·
-**No** feegrant/group/circuit/authz. Smart-contract deployment is impossible by
-construction — those modules are not compiled into the binary.
-
 ---
 
 ## Table of Contents
