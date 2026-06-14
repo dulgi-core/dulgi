@@ -355,5 +355,4 @@ dulgid tx ibc-transfer transfer transfer channel-0 <recipient> 1000000udul --fro
 
 ### License
 
-Apache-2.0 (recommended for Cosmos SDK chains). Add a `LICENSE` file before
-public release.
+Apache-2.0
