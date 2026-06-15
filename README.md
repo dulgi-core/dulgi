@@ -8,8 +8,8 @@
 [![ARM64 Release](https://img.shields.io/badge/ARM64-v1.0.0-success?logo=linux)](https://github.com/dulgi-core/dulgi/releases/tag/v1.0.0_arm64)
 [![AMD64 Release](https://img.shields.io/badge/AMD64-v1.0.0-success?logo=linux)](https://github.com/dulgi-core/dulgi/releases/tag/v1.0.0_amd64)
 [![License](https://img.shields.io/badge/License-Apache%202.0-orange)](https://www.apache.org/licenses/LICENSE-2.0)
-[![X](https://img.shields.io/badge/@dulgi__core-000000?logo=x&logoColor=white)](https://x.com/dulgi_core?s=21)
 ![IBC](https://img.shields.io/badge/IBC-Enabled-blue)
+[![X](https://img.shields.io/badge/@dulgi__core-000000?logo=x&logoColor=white)](https://x.com/dulgi_core?s=21)
 [![Discord](https://img.shields.io/badge/Discord-Join%20Server-5865F2?logo=discord&logoColor=white)](https://discord.gg/gA5QTyC99b)
 
 **Dulgi** is a lightweight, IBC-native Cosmos SDK Layer-1 blockchain focused on
