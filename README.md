@@ -1,5 +1,9 @@
 # Dulgi
 
+<p align="center">
+  <img src="./assets/dulgi.png" width="200">
+</p>
+
 **Dulgi** is a lightweight, IBC-native Cosmos SDK Layer-1 blockchain focused on
 fast token transfers, staking, governance, and cross-chain interoperability —
 with every non-essential feature removed.
