@@ -78,7 +78,7 @@ Dulgi/
 
 ## 2. Architecture
 
-### Module set (minimal by design)
+### Module set
 
 Dulgi compiles only the modules required for a transfer/staking/governance chain
 with IBC:
@@ -102,18 +102,14 @@ with IBC:
 | `capability` | object-capability keys for IBC ports/channels |
 | `07-tendermint` | IBC Tendermint light client |
 
-Everything else (CosmWasm, EVM, NFT, ICA, ICQ, feegrant, group, circuit, authz,
-crisis, simulation) is **not imported**, so the attack surface, dependency
-count, binary size, and state footprint are all minimized.
-
 ### Wiring
 
-`app_config.go` declares the SDK modules with **depinject** (the modern
-`runtime.App` approach). IBC-go v8 is not yet depinject-native, so the IBC
+`app_config.go` declares the SDK modules with **depinject**. 
+IBC-go v8 is not yet depinject-native, so the IBC
 keepers (`capability`, `ibc`, `transfer`) are wired manually in `app.go` after
 the runtime app is built, their stores registered via `RegisterStores`, and the
 modules spliced into the manager via `RegisterModules`. The module execution
-order (begin/end-blockers, init/export genesis, preblockers) is declared on the
+order is declared on the
 runtime module config and applied by `app.Load()` — including the IBC modules,
 which is why their names appear in the order slices in `app_config.go`.
 
@@ -242,7 +238,7 @@ Mainnet uses a coordinated genesis ceremony.
 
 2. **Distribute** the `genesis.json` to all genesis validators.
 3. **Each validator** funds its operator key from one of the allocation
-   accounts (or is pre-funded) and submits a gentx (≥1,000,000 DUL
+   accounts and submits a gentx (≥1,000,000 DUL
    self-delegation).
 4. **Coordinator** collects gentxs and publishes the final genesis:
    ```bash
@@ -251,7 +247,7 @@ Mainnet uses a coordinated genesis ceremony.
 5. Publish the final `genesis.json` (with its sha256) and seed node IDs.
 6. Validators start at the agreed genesis time.
 
-> Vesting allocations (e.g. Team) can be created with
+> Vesting allocations can be created with
 > `dulgid genesis add-genesis-account <addr> <amt> --vesting-amount <amt> --vesting-end-time <unix>`.
 
 ## 7. IBC relayer setup
