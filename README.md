@@ -1,7 +1,7 @@
 # Dulgi
 
 <p align="center">
-  <img src="./assets/dulgi2.png" width="200">
+  <img src="./assets/dulgi2.png" width="450">
 </p>
 
 ![Cosmos SDK](https://img.shields.io/badge/Built%20with-Cosmos%20SDK-5064FB?logo=cosmos)
