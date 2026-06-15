@@ -12,9 +12,8 @@
 [![X](https://img.shields.io/badge/@dulgi__core-000000?logo=x&logoColor=white)](https://x.com/dulgi_core?s=21)
 [![Discord](https://img.shields.io/badge/Discord-Join%20Server-5865F2?logo=discord&logoColor=white)](https://discord.gg/gA5QTyC99b)
 
-**Dulgi** is a lightweight, IBC-native Cosmos SDK Layer-1 blockchain focused on
-fast token transfers, staking, governance, and cross-chain interoperability —
-with every non-essential feature removed.
+**Dulgi** is a lightweight, IBC-native Cosmos SDK blockchain focused on
+fast token transfers, staking, governance, and cross-chain interoperability.
 
 | Property | Value |
 |---|---|
