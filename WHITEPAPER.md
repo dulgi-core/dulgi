@@ -3,7 +3,6 @@
 ### A Fun-First Rest Stop for Blockchain Networks
 
 **Whitepaper · v1.0**
-**Chain: Dulgi · Token: Dulgi Coin (DUL)**
 
 ---
 
