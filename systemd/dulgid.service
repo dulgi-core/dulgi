@@ -1,0 +1,34 @@
+[Unit]
+Description=Dulgi Node (dulgid)
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+User=dulgi
+Group=dulgi
+# Adjust the home path and minimum gas price for your deployment.
+ExecStart=/usr/local/bin/dulgid start --home /home/dulgi/.dulgi --minimum-gas-prices 0.025udul
+Restart=on-failure
+RestartSec=3
+# Allow plenty of open files for p2p + leveldb.
+LimitNOFILE=65535
+
+# --- Hardening ---------------------------------------------------------------
+NoNewPrivileges=true
+ProtectSystem=full
+ProtectHome=read-only
+ReadWritePaths=/home/dulgi/.dulgi
+PrivateTmp=true
+
+# --- Optional: Cosmovisor for zero-downtime governance upgrades --------------
+# To run under cosmovisor instead, replace ExecStart with:
+#   ExecStart=/usr/local/bin/cosmovisor run start --home /home/dulgi/.dulgi --minimum-gas-prices 0.025udul
+# and set:
+#   Environment="DAEMON_NAME=dulgid"
+#   Environment="DAEMON_HOME=/home/dulgi/.dulgi"
+#   Environment="DAEMON_ALLOW_DOWNLOAD_BINARIES=false"
+#   Environment="DAEMON_RESTART_AFTER_UPGRADE=true"
+#   Environment="UNSAFE_SKIP_BACKUP=false"
+
+[Install]
+WantedBy=multi-user.target

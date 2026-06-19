@@ -1,0 +1,57 @@
+# Dulgi single-node docker-compose for local development / quick deployment.
+#
+#   docker compose up -d        # start node (initializes on first run)
+#   docker compose logs -f       # follow logs
+#   docker compose down          # stop
+#
+# Genesis/keys are initialized by the init container on first boot only.
+
+services:
+  dulgi-init:
+    build: .
+    image: dulgi/dulgid:latest
+    container_name: dulgi-init
+    user: dulgi
+    entrypoint: ["/bin/bash", "-c"]
+    command:
+      - |
+        set -e
+        if [ ! -f "$$DAEMON_HOME/config/genesis.json" ]; then
+          echo "Initializing Dulgi node...";
+          dulgid init "$${MONIKER:-dulgi-docker}" --chain-id "$${CHAIN_ID:-dulgi-1}" --default-denom udul --home "$$DAEMON_HOME";
+          dulgid keys add validator --keyring-backend test --home "$$DAEMON_HOME";
+          dulgid genesis add-genesis-account validator 10000000000000udul --keyring-backend test --home "$$DAEMON_HOME";
+          dulgid genesis gentx validator 1000000000000udul --chain-id "$${CHAIN_ID:-dulgi-1}" --keyring-backend test --home "$$DAEMON_HOME";
+          dulgid genesis collect-gentxs --home "$$DAEMON_HOME";
+          dulgid genesis validate-genesis --home "$$DAEMON_HOME";
+          # bind RPC to all interfaces inside the container
+          sed -i 's#tcp://127.0.0.1:26657#tcp://0.0.0.0:26657#' "$$DAEMON_HOME/config/config.toml";
+          sed -i 's/^enable = false/enable = true/' "$$DAEMON_HOME/config/app.toml";
+        fi
+    environment:
+      - CHAIN_ID=dulgi-1
+      - MONIKER=dulgi-docker
+    volumes:
+      - dulgi-data:/home/dulgi/.dulgi
+
+  dulgi-node:
+    build: .
+    image: dulgi/dulgid:latest
+    container_name: dulgi-node
+    user: dulgi
+    depends_on:
+      dulgi-init:
+        condition: service_completed_successfully
+    command: ["start", "--home", "/home/dulgi/.dulgi", "--minimum-gas-prices", "0.025udul", "--api.enable"]
+    ports:
+      - "26656:26656"   # p2p
+      - "26657:26657"   # rpc
+      - "1317:1317"     # rest api
+      - "9090:9090"     # grpc
+      - "26660:26660"   # prometheus
+    volumes:
+      - dulgi-data:/home/dulgi/.dulgi
+    restart: unless-stopped
+
+volumes:
+  dulgi-data:
